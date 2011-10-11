@@ -1,0 +1,36 @@
+[production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Application"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
+resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
+resources.view[] =
+resources.db.adapter = "PDO_SQLITE"
+resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
+
+
+resources.Jquery.noconflictmode = true        
+resources.Jquery.version = 1.6.4             
+;resources.Jquery.localpath = "/assets/js/jquery-1.6.4.min.js"
+resources.Jquery.enable = true
+resources.Jquery.ui_enable = true
+resources.Jquery.ui_version = 1.8.16
+;resources.Jquery.ui_localpath = "/assets/js/jquery-ui-1.8.16.custom.min.js";
+resources.Jquery.cdn_ssl = false
+resources.Jquery.render_mode = 255
+;resources.Jquery.javascriptfiles.0 = "/some/file.js"
+resources.Jquery.stylesheets.0 = "/assets/css/smoothness/jquery-ui-1.8.16.custom.css"
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1

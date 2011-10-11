@@ -1,0 +1,73 @@
+<p><a href="<?php echo $this->url(
+    array(
+        'controller' => 'guestbook',
+        'action'     => 'sign'
+    ),
+    'default',
+    true) ?>">Sign Our Guestbook</a></p>
+
+Guestbook Entries: <br />
+<dl>
+    <?php foreach ($this->entries as $entry): ?>
+    <dt><?php echo $this->escape($entry->email) ?></dt>
+    <dd><?php echo $this->escape($entry->comment) ?></dd>
+    <?php endforeach ?>
+</dl>
+
+<?php
+echo $this->ajaxLink("Ajax Form",
+                          $this->url(
+    array(
+        'controller' => 'guestbook',
+        'action'     => 'sign'
+    ),
+    'default',
+    true),
+                          array('update' => '#ajax_form')); ?>
+
+                          <div id="ajax_form"></div>
+    <form method="post" action="bid.php">
+        <label for="locaction">Where do you want to travel?</label>
+        <?php echo $this->autoComplete("location",
+                                       "",
+                                       array('source' => array('New York',
+                                                             'Mexico City',
+                                                             'Sydney',
+                                                             'Ruegen',
+                                                             'Baden Baden'))); ?>
+        <br />
+
+        <label for="startDate">Travel Start Date:</label>
+        <?php echo $this->datePicker("startDate", '',
+                 array(
+                    'defaultDate' => '+7',
+                    'minDate' => '+7',
+                    //'onClose' => new Zend_Json_Expr('myJsonFuncCechkingValidity')
+                    )); ?>
+        <br />
+
+        <label for="startDate">Travel End Date:</label>
+        <?php echo $this->datePicker("endDate", '',
+                 array(
+                    'defaultDate' => '+14',
+                    'minDate' => '+7',
+                    //'onClose' => new Zend_Json_Expr('myJsonFuncCechkingValidity')
+                    )); ?>
+        <br />
+        <label for="shirtColor">Shirt Color:</label>
+        <?php echo $this->colorPicker("shirtColor", '',
+                 array(
+                  
+                    )); ?>
+        <br />
+        <label for="bid">Your Bid:</label>
+        <?php echo $this->slider("bid",
+                                  "",
+                                  array('min' => 1205.50,
+                                        'max' => 10000,
+                                        'start' => 1205.50,
+                                        'currency' => '€')); ?>
+        <br />
+
+        <input type="submit" value="Bid!" />
+    </form>

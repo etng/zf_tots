@@ -1,0 +1,9 @@
+var/cache/*
+var/log/*
+application/configs/application.ini
+public/uploads/*
+*.svn*
+*~
+.buildpath
+.project
+.settings
