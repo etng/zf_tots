@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__file__) . '/Action.php');
+
 class ErrorController extends Tots_Controller_Action
 {
     public function errorAction()

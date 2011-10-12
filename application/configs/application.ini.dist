@@ -31,9 +31,14 @@ resources.view[] =
 ; resources.multidb.read.dbname = "tots"
 ; resources.multidb.read.default = true
 
+resources.db.adapter = "pdo_mysql"
+resources.db.params.host = "localhost"
+resources.db.params.username = "username"
+resources.db.params.password = "password"
+resources.db.params.dbname = "tots"
 
-resources.db.adapter = "PDO_SQLITE"
-resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
+;resources.db.adapter = "PDO_SQLITE"
+;resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 
 
 resources.cachemanager.database.frontend.name = Class
@@ -54,7 +59,7 @@ resources.locale.default = "zh_CN"
 ;resources.locale.force = true
 resources.locale.cache = "default" ; use the default cache to cache locale
 
-resources.translate.adapter = tmx
+resources.translate.adapter = Array
 resources.translate.content = APPLICATION_PATH "/../data/language"
 resources.translate.scan = Zend_Translate::LOCALE_DIRECTORY
 
@@ -62,6 +67,16 @@ resources.translate.scan = Zend_Translate::LOCALE_DIRECTORY
 resources.translate.cache = "default"; use the default cache to cache language
 
 
+resources.log.stream.writerName = "Stream"
+resources.log.stream.writerParams.stream = APPLICATION_PATH "/../var/log/application.log"
+resources.log.stream.writerParams.mode = "a"
+resources.log.stream.filterName = "Priority"
+resources.log.stream.filterParams.priority = 7
+    
+resources.log.firebug.writerName = "Firebug"
+resources.log.firebug.writerParams[] = 
+resources.log.firebug.filterName = "Priority"
+resources.log.firebug.filterParams.priority = 7
 
 resources.mail.transport.type = smtp
 resources.mail.transport.host = "smtp.tots.com"

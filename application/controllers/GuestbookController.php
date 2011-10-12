@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__file__) . '/Action.php');
 class GuestbookController extends Tots_Controller_Action
 {
     public function indexAction()
