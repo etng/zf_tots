@@ -8,6 +8,8 @@ class Tots_Controller_Action extends Zend_Controller_Action
          */
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
         $this->view->flashMessages = $this->_flashMessenger->getMessages();
+        Zend_Paginator::setDefaultScrollingStyle('Sliding');
+        Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
     }
     function disableAutoRender()
     {
@@ -43,7 +45,7 @@ class Tots_Controller_Action extends Zend_Controller_Action
     function log($message, $priority, $extras = null)
     {
         /**
-         * 
+         *
          * Enter description here ...
          * @var Zend_Log
          */
@@ -53,7 +55,7 @@ class Tots_Controller_Action extends Zend_Controller_Action
     function sendFile($file_path)
     {
         ob_clean();
-        
+
         header('Content-Type: ' . mime_content_type($file_path));
         header('Content-Disposition: attachment; filename="' . basename($file_path) .'"');
         header('Cache-Control: max-age=0');
