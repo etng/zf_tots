@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle() ?>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/ico/favicon.ico">
+    <?php echo $this->jQuery();?>
+        <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <?php echo $this->partial('header.phtml', 'default') ?>
+    <div class="container-fluid">
+      <div class="sidebar">
+      <?php echo $this->partial('sidebar.phtml', 'default') ?>
+      </div>
+      <div class="content">
+      <?php echo $this->layout()->content ?>
+        <hr>
+        <footer>
+        <?php echo $this->partial('footer.phtml', 'default') ?>
+
+        </footer>
+      </div>
+    </div>
+
+  </body>
+</html>
