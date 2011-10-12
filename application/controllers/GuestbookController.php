@@ -1,22 +1,23 @@
 <?php
-class GuestbookController extends Zend_Controller_Action
+class GuestbookController extends Tots_Controller_Action
 {
     public function indexAction()
     {
-        $guestbook = new Application_Model_GuestbookMapper();
-        $this->view->entries = $guestbook->fetchAll();
+        $guestbooks = new Tots_Model_Table_Guestbook();
+        $this->view->entries = $guestbooks->fetchAll();
     }
 
     public function signAction()
     {
         $request = $this->getRequest();
-        $form    = new Application_Form_Guestbook();
+        $form    = new Tots_Form_Guestbook();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $comment = new Application_Model_Guestbook($form->getValues());
-                $mapper  = new Application_Model_GuestbookMapper();
-                $mapper->save($comment);
+                $comments = new Tots_Model_Table_Guestbook();
+                $comment = $comments->createRow();
+                $comment->setFromArray($form->getValues());
+                $comment->save();
                 return $this->_helper->redirector('index');
             }
         }

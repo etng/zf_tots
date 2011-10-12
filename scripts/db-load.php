@@ -60,21 +60,28 @@ if ('testing' != APPLICATION_ENV) {
 // Check to see if we have a database file already
 $options = $bootstrap->getOption('resources');
 $dbFile  = $options['db']['params']['dbname'];
-if (file_exists($dbFile)) {
-    unlink($dbFile);
+$type = $options['db']['adapter'];
+if(strpos($type, 'pdo_')===0)
+{
+    $type = substr($type, strlen('pdo_'));
 }
-touch($dbFile);
+if(!empty($dbFile))
+{
+    if (file_exists($dbFile)) {
+        unlink($dbFile);
+    }
+    touch($dbFile);
+}
 // this block executes the actual statements that were loaded from
 // the schema file.
 try {
-    foreach (glob(APPLICATION_PATH . '/../data/db/schema/*.sqlite.sql') as $schemaFile)
+    foreach (glob(APPLICATION_PATH . '/../data/db/schema/*.'.$type.'.sql') as $schemaFile)
     {
         $schemaSql = file_get_contents($schemaFile);
-        echo $schemaSql;
        // use the connection directly to load sql in batches
         $dbAdapter->getConnection()->exec($schemaSql);
     }
-    chmod($dbFile, 0666);
+    empty($dbFile) || chmod($dbFile, 0666);
  
     if ('testing' != APPLICATION_ENV) {
         echo PHP_EOL;
@@ -83,7 +90,7 @@ try {
     }
  
     if ($withData) {
-        foreach (glob(APPLICATION_PATH . '/../data/db/fixture/*.sqlite.sql') as $dataFile)
+        foreach (glob(APPLICATION_PATH . '/../data/db/fixture/*.'.$type.'.sql') as $dataFile)
         {
             $dataSql = file_get_contents($dataFile);
             // use the connection directly to load sql in batches

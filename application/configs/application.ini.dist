@@ -1,17 +1,78 @@
 [production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
+phpSettings.error_reporting = 8191
+phpSettings.date.timezone = "Asia/Shanghai"
+
 includePaths.library = APPLICATION_PATH "/../library"
+
+
+
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
-appnamespace = "Application"
+appnamespace = "Tots"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 resources.view[] =
+
+; resources.multidb.defaultMetadataCache = "database"
+; 
+; resources.multidb.write.adapter = "pdo_mysql"
+; resources.multidb.write.host = "localhost"
+; resources.multidb.write.username = "username"
+; resources.multidb.write.password = "password"
+; resources.multidb.write.dbname = "tots"
+; 
+; resources.multidb.read.adapter = "pdo_mysql"
+; resources.multidb.read.host = "localhost:3307"
+; resources.multidb.read.username = "username"
+; resources.multidb.read.password = "password"
+; resources.multidb.read.dbname = "tots"
+; resources.multidb.read.default = true
+
+
 resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 
+
+resources.cachemanager.database.frontend.name = Class
+resources.cachemanager.database.frontend.options.lifetime = 86400
+resources.cachemanager.database.frontend.options.automatic_serialization = true
+resources.cachemanager.database.backend.name = File
+resources.cachemanager.database.backend.options.cache_dir = APPLICATION_PATH"/../var/cache/db"
+
+resources.cachemanager.default.frontend.name = Core
+resources.cachemanager.default.frontend.options.lifetime = 3600
+resources.cachemanager.default.frontend.options.cache_id_prefix = "c_"
+resources.cachemanager.default.frontend.options.automatic_serialization = true
+resources.cachemanager.default.backend.name = MEMCACHED
+resources.cachemanager.default.backend.options.host = "127.0.0.1"
+resources.cachemanager.default.backend.options.port = 11211
+
+resources.locale.default = "zh_CN"
+;resources.locale.force = true
+resources.locale.cache = "default" ; use the default cache to cache locale
+
+resources.translate.adapter = tmx
+resources.translate.content = APPLICATION_PATH "/../data/language"
+resources.translate.scan = Zend_Translate::LOCALE_DIRECTORY
+
+; Optionally you can also the cache template to use for caching:
+resources.translate.cache = "default"; use the default cache to cache language
+
+
+
+resources.mail.transport.type = smtp
+resources.mail.transport.host = "smtp.tots.com"
+resources.mail.transport.auth = login
+resources.mail.transport.username = username
+resources.mail.transport.password = password
+resources.mail.transport.register = true ; True by default
+resources.mail.defaultFrom.email = webmaster@tots.com
+resources.mail.defaultFrom.name = "tots.com"
+resources.mail.defaultReplyTo.email = webmaster@tots.com
+resources.mail.defaultReplyTo.name = "tots.com"
 
 resources.Jquery.noconflictmode = true        
 resources.Jquery.version = 1.6.4             

@@ -112,8 +112,13 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
             $sql = $sql->assemble();
         }
         $this->_parseParameters($sql);
+        try{
         $this->_prepare($sql);
-
+        }catch (Exception $e)
+        {
+            var_dump($e->getMessage() .'<br />'. $sql);
+            die();
+        }
         $this->_queryId = $this->_adapter->getProfiler()->queryStart($sql);
     }
 
