@@ -30,12 +30,11 @@ if ($getopt->getOption('h')) {
 $withData = $getopt->getOption('w');
 $env      = $getopt->getOption('e');
 define('APPLICATION_ENV', (null === $env) ? 'development' : $env);
- 
-// Initialize Zend_Application
-$application = new Zend_Application(
-    APPLICATION_ENV,
-    APPLICATION_PATH . '/configs/application.ini'
-);
+$app_cfg_file = APPLICATION_PATH . '/configs/application.ini';
+if(!is_readable($app_cfg_file))
+{
+    $app_cfg_file = APPLICATION_PATH . '/configs/application.ini.dist';
+} 
  
 // Initialize and retrieve DB resource
 $bootstrap = $application->getBootstrap();

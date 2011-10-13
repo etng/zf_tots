@@ -1,5 +1,5 @@
 <?php
-class Tots_Controller_Action extends Zend_Controller_Action
+class Et_Controller_Action extends Zend_Controller_Action
 {
     public function init()
     {

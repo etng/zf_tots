@@ -1,6 +1,5 @@
 <?php
-require_once (dirname(__file__) . '/Action.php');
-class DemoController extends Tots_Controller_Action
+class DemoController extends Et_Controller_Action
 {
     public function logAction()
     {
@@ -15,4 +14,3 @@ class DemoController extends Tots_Controller_Action
         $this->renderText('Please Use Firefox and FirePHP extension to view the log message!');
     }
 }
-

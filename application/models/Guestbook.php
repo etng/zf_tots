@@ -1,7 +1,7 @@
 <?php
-class Tots_Model_Guestbook extends Zend_Db_Table_Row
+class Model_Guestbook extends Model_Abstract
 {
-    protected $_tableClass = 'Tots_Model_Table_Guestbook';
+    protected $_tableClass = 'Model_Table_Guestbook';
     function _insert()
     {
         $this->created = date('Y-m-d H:i:s');

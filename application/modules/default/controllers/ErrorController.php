@@ -1,7 +1,5 @@
 <?php
-require_once(dirname(__file__) . '/Action.php');
-
-class ErrorController extends Tots_Controller_Action
+class ErrorController extends Et_Controller_Action
 {
     public function errorAction()
     {
@@ -39,4 +37,3 @@ class ErrorController extends Tots_Controller_Action
         $this->view->request = $errors->request;
     }
 }
-

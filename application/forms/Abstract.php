@@ -1,5 +1,5 @@
 <?php
-abstract class Tots_Form_Abstract extends Zend_Form
+abstract class Form_Abstract extends Zend_Form
 {
      public function init()
     {

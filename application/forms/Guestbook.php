@@ -1,5 +1,5 @@
 <?php
-class Tots_Form_Guestbook extends Tots_Form_Abstract
+class Form_Guestbook extends Form_Abstract
 {
     public function configure()
     {
