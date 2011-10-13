@@ -1,15 +1,19 @@
 <?php
 class Et_Controller_Action extends Zend_Controller_Action
 {
+    public static $message_lvls = array('warning', 'error', 'success', 'info');
     public function init()
     {
         /**
          * @var Zend_Controller_Action_Helper_FlashMessenger
          */
         $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->flashMessages = $this->_flashMessenger->getMessages();
+        $this->view->messages = $this->_flashMessenger->getMessages();
         Zend_Paginator::setDefaultScrollingStyle('Sliding');
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
+    }
+    public function message($message, $lvl='success') {
+        $this->view->messages[]=compact('message', 'lvl');
     }
     function disableAutoRender()
     {
@@ -26,9 +30,9 @@ class Et_Controller_Action extends Zend_Controller_Action
         $this->disableAutoRender();
         echo $text;
     }
-    function flash($message, $new_url = null)
+    function flash($message, $lvl='success', $new_url = null)
     {
-        $this->_flashMessenger->addMessage($message);
+        $this->_flashMessenger->addMessage(compact('message', 'lvl'));
         if($new_url)
         {
             $this->_redirect($new_url);

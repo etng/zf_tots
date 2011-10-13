@@ -21,7 +21,7 @@ class Form_Guestbook extends Form_Abstract
             'required'   => true,
             'rows'=>'3',
             'validators' => array(
-                array('validator' => 'StringLength', 'options' => array(20, 2000))
+                array('validator' => 'StringLength', 'options' => array(5, 2000))
                 ),
         ));
         $this->addElement('text', 'travel_start_date', array(
@@ -29,7 +29,7 @@ class Form_Guestbook extends Form_Abstract
             'description'      => 'When will you start your travel',
 //            'helper'   => 'DatePicker',
             'class'=>'datepicker',
-            'required'   => true,
+            'required'   => false,
              'defaultDate' => '+7',
              'minDate' => '+7',
             'validators' => array(),

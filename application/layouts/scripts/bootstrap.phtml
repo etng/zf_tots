@@ -21,10 +21,17 @@
   <body>
     <?php echo $this->partial('header.phtml', 'default') ?>
     <div class="container-fluid">
+
       <div class="sidebar">
       <?php echo $this->partial('sidebar.phtml', 'default') ?>
       </div>
       <div class="content">
+          <?php foreach($this->messages as $message):?>
+<div class="alert-message <?php echo $message['lvl'] ?>">
+  <a class="close" href="#">×</a>
+  <p><?php echo $message['message'] ?></p>
+</div>
+<?php endforeach;?>
       <?php echo $this->layout()->content ?>
         <hr>
         <footer>

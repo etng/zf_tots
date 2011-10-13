@@ -25,7 +25,8 @@ class GuestbookController extends Et_Controller_Action
             $comment->save();
             $i++;
         }
-        $this->renderText('done');
+        $this->flash('done', 'success', 'index');
+        //$this->renderText('done');
     }
     public function signAction()
     {
@@ -42,7 +43,7 @@ class GuestbookController extends Et_Controller_Action
                 $comment = $comments->createRow();
                 $comment->setFromArray($form->getValues());
                 $comment->save();
-                return $this->_helper->redirector('index');
+                $this->flash('comment saved', 'success', 'index');
             }
         }
 
