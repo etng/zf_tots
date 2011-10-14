@@ -3,7 +3,13 @@
   <li class="active">Guestbook</li>
 </ul>
 
-<a class="btn" href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'sign' ), 'default', true) ?>">Sign</a>
+
+<a href="<?php echo $this->url( array('controller' => 'guestbook', 'filter_confirm' => 'all' ), 'default', true) ?>"<?php $this->filter_confirm=='all' and print ' class="active"' ?>>All</a>
+<a href="<?php echo $this->url( array('controller' => 'guestbook', 'filter_confirm' => 'confirmed' ), 'default', true) ?>"<?php $this->filter_confirm=='confirmed' and print ' class="active"' ?>>confirmed</a>
+<a href="<?php echo $this->url( array('controller' => 'guestbook', 'filter_confirm' => 'unconfirmed' ), 'default', true) ?>"<?php $this->filter_confirm=='unconfirmed' and print ' class="active"' ?>>unconfirmed</a>
+
+     <a class="btn" href="<?php echo $this->url( array('controller' => 'guestbook', 'action' => 'create' ), 'default', true) ?>">Create</a>
+
      <table class="zebra-striped" id="sortTableExample">
         <thead>
           <tr>
@@ -11,14 +17,27 @@
             <th class="yellow">Email</th>
             <th class="blue">Comment</th>
             <th class="green">Created At</th>
+            <th class="green">Status</th>
+            <th class="green">Actions</th>
           </tr>
         </thead>
         <tbody> <?php foreach ($this->guestbook_paginator as $guestbook): ?>
           <tr>
             <td><?php echo $this->escape($guestbook->id) ?></td>
-            <td><?php echo $this->escape($guestbook->email) ?></td>
+            <td><?php echo $this->gravatar($guestbook->email);?><?php echo $this->escape($guestbook->email) ?></td>
             <td><?php echo $this->escape($guestbook->comment) ?></td>
             <td><?php echo $this->escape($guestbook->created) ?></td>
+            <td>
+            <?php if($guestbook->confirmed!='0000-00-00 00:00:00'): ?>
+            <?php echo $this->escape($guestbook->confirmed) ?>
+            <?php else: ?>
+            <a href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'confirm', 'id'=>$guestbook->id)) ?>">Confirm</a>
+            <?php endif; ?>
+            </td>
+            <td>
+            <a href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'edit', 'id'=>$guestbook->id)) ?>">Edit</a>
+            <a href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'delete', 'id'=>$guestbook->id)) ?>">Delete</a>
+            </td>
           </tr><?php endforeach ?>
         </tbody>
       </table>

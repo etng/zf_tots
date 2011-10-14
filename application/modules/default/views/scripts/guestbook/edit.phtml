@@ -1,0 +1,9 @@
+<ul class="breadcrumb">
+  <li><a href="<?php echo $this->url(array('action'=>'index', 'controller'=>'index'))?>">Home</a> <span class="divider">/</span></li>
+  <li><a href="<?php echo $this->url(array('action'=>'index'))?>">Guestbook</a> <span class="divider">/</span></li>
+  <li class="active">Edit</li>
+</ul>
+<?php $this->headTitle('Tots')->headTitle('Guestbook')->headTitle('Edit')->setSeparator(' - ') ?>
+<?php
+$this->form->setName('commentFrm')->setAction($this->url());
+echo $this->form;

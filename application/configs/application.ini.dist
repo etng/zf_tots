@@ -19,6 +19,7 @@ resources.frontController.actionHelperPaths.HELPER_Prefix = "Et/Controller/Actio
 resources.frontController.plugins.layoutloader = Et_Controller_Plugin_ModuleLayout
 
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
+resources.layout.layout = "bootstrap"
 resources.view[] =
 
 ; resources.multidb.defaultMetadataCache = "database"
@@ -103,8 +104,17 @@ resources.Jquery.ui_version = 1.8.16
 ;resources.Jquery.ui_localpath = "/assets/js/jquery-ui-1.8.16.custom.min.js";
 resources.Jquery.cdn_ssl = false
 resources.Jquery.render_mode = 255
-;resources.Jquery.javascriptfiles.0 = "/some/file.js"
-resources.Jquery.stylesheets.0 = "/assets/css/smoothness/jquery-ui-1.8.16.custom.css"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-alerts.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-dropdown.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-modal.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-twipsy.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-popover.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-scrollspy.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/bootstrap-tabs.js"
+resources.Jquery.javascriptfiles[] = "/assets/js/global.js"
+resources.Jquery.stylesheets[] = "/assets/css/smoothness/jquery-ui-1.8.16.custom.css"
+resources.Jquery.stylesheets[] = "/assets/css/bootstrap.min.css"
+resources.Jquery.stylesheets[] = "/assets/css/global.css"
 [staging : production]
 
 [testing : production]

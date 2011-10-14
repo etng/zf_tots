@@ -1102,8 +1102,15 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             $options = array('prefixPath' => $prefixPaths);
         } elseif (is_array($options)) {
             if (array_key_exists('prefixPath', $options)) {
+            if($type=='captcha')
+{
+                var_dump($prefixPaths, $options['prefixPath']);
+    }
                 $options['prefixPath'] = array_merge($prefixPaths, $options['prefixPath']);
-            } else {
+                        if($type=='captcha')
+{
+                var_dump($prefixPaths, $options['prefixPath']);
+    }            } else {
                 $options['prefixPath'] = $prefixPaths;
             }
         }

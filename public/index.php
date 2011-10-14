@@ -18,6 +18,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 require_once 'Zend/Application.php';
 
 $app_cfg_file = APPLICATION_PATH . '/configs/application.ini';
+
 if(!is_readable($app_cfg_file))
 {
     $app_cfg_file = APPLICATION_PATH . '/configs/application.ini.dist';

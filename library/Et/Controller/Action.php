@@ -12,8 +12,9 @@ class Et_Controller_Action extends Zend_Controller_Action
         Zend_Paginator::setDefaultScrollingStyle('Sliding');
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('pagination.phtml');
     }
-    public function message($message, $lvl='success') {
-        $this->view->messages[]=compact('message', 'lvl');
+    public function message($message, $lvl = 'success')
+    {
+        $this->view->messages[] = compact('message', 'lvl');
     }
     function disableAutoRender()
     {
@@ -23,25 +24,41 @@ class Et_Controller_Action extends Zend_Controller_Action
     function renderJson($data)
     {
         $this->disableAutoRender();
+        $this->getResponse()->sendHeaders();
         echo Zend_Json::encode($data);
     }
     function renderText($text)
     {
         $this->disableAutoRender();
+        $this->getResponse()->sendHeaders();
         echo $text;
     }
-    function flash($message, $lvl='success', $new_url = null)
+    function flash($message, $lvl = 'success')
     {
+        $params = func_get_args();
+        $message = array_shift($params);
+        $lvl = array_shift($params);
         $this->_flashMessenger->addMessage(compact('message', 'lvl'));
-        if($new_url)
+        if($params)
         {
-            $this->_redirect($new_url);
+            /**
+             * @todo redirectUrl not included now
+             */
+            if(is_array($params[0]))
+            {
+                call_user_func_array(array($this, 'redirectRoute'), $params);
+            
+            }else 
+            {
+                call_user_func_array(array($this, 'redirect'), $params);
+            }
         }
     }
     function getBootStrapResource($resource_name)
     {
         $bootstrap = $this->getInvokeArg('bootstrap');
-        if (!$bootstrap->hasResource($resource_name)) {
+        if(! $bootstrap->hasResource($resource_name))
+        {
             return false;
         }
         return $bootstrap->getResource($resource_name);
@@ -59,13 +76,64 @@ class Et_Controller_Action extends Zend_Controller_Action
     function sendFile($file_path)
     {
         ob_clean();
-
         header('Content-Type: ' . mime_content_type($file_path));
-        header('Content-Disposition: attachment; filename="' . basename($file_path) .'"');
+        header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
         header('Cache-Control: max-age=0');
         header("Content-Length: " . filesize($file_path));
         readfile($file_path);
         @unlink($file_path);
+    }
+    /**
+     * Redirect to another Route
+     *
+     * Proxies to {@link Zend_Controller_Action_Helper_Redirector::gotoRoute()}.
+     *
+     * @param  array   $urlOptions Array of key/value pairs used to assemble URL
+     * @param  string  $name
+     * @param  boolean $reset
+     * @param  boolean $encode
+     * @return void
+     */        
+    function redirectRoute(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
+    {
+        $this->_helper->redirector->gotoRoute($url, $options);
+    }
+    /**
+     * Redirect to another Action
+     *
+     * Proxies to {@link Zend_Controller_Action_Helper_Redirector::gotoUrl()}.
+     *
+     * @param  string $action
+     * @param  string $controller
+     * @param  string $module
+     * @param  array  $params
+     * @return void
+     */    
+    function redirect($action, $controller = null, $module = null, array $params = array())
+    {
+        $this->_helper->redirector->gotoSimple($url, $options);
+    }
+    /**
+     * Redirect to another URL
+     *
+     * Proxies to {@link Zend_Controller_Action_Helper_Redirector::gotoUrl()}.
+     *
+     * @param string $url
+     * @param array $options Options to be used when redirecting
+     * @return void
+     */
+    function redirectUrl($url, array $options = array())
+    {
+        $this->_helper->redirector->gotoUrl($url, $options);
+    }
+    function forward404Unless($assert)
+    {
+        if(!$assert)
+        {
+             $this->getResponse()->setHttpResponseCode(404);
+             $this->renderText('404 - Not found');
+             exit();
+        }
     }
 }
 ?>

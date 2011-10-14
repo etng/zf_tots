@@ -231,7 +231,7 @@ return array(
 
     // Zend_Validate_NotEmpty
     "Invalid type given. String, integer, float, boolean or array expected" => "Invalid type given. String, integer, float, boolean or array expected",
-    "Value is required and can't be empty" => "Value is required and can't be empty",
+    "Value is required and can't be empty" => "必填",
 
     // Zend_Validate_PostCode
     "Invalid type given. String or integer expected" => "Invalid type given. String or integer expected",
