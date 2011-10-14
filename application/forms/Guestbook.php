@@ -1,5 +1,5 @@
 <?php
-class Form_Guestbook extends Form_Abstract
+class Form_Guestbook extends Et_Form
 {
     public function configure()
     {
@@ -22,9 +22,7 @@ class Form_Guestbook extends Form_Abstract
         'required' => true, 
         'rows' => '3', 
         'validators' => array(
-        array(
-        'validator' => 'StringLength', 
-        'options' => array(5, 2000)))));
+        array('validator' => 'StringLength', 'options' => array(5, 2000)))));
         $this->addElement('datePicker', 'published', array(
         'label' => 'Publish Date:', 
         'description' => 'When will you make this article public', 

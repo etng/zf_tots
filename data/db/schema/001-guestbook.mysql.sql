@@ -13,13 +13,18 @@
 
 # Dumping structure for table tots.guestbook
 DROP TABLE IF EXISTS `guestbook`;
-CREATE TABLE IF NOT EXISTS `guestbook` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) DEFAULT NULL,
-  `comment` text,
-  `created` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `guestbook` (
+	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`email` VARCHAR(50) NOT NULL,
+	`comment` TEXT NOT NULL,
+	`created` DATETIME NOT NULL,
+	`published` DATETIME NOT NULL,
+	`confirmed` DATETIME NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DEFAULT;
 
 # Data exporting was unselected.
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
