@@ -11,7 +11,7 @@ class GuestbookController extends Et_Controller_Action
             break;
             case 'unconfirmed':
                 $guestbooks->selectUnConfirmed($select);
-            break;              
+            break;
             default:
                 $filter_confirm = 'all';
             break;
@@ -68,7 +68,7 @@ class GuestbookController extends Et_Controller_Action
         $comment = $comments->find($this->_getParam('id'))->current();
         $this->forward404Unless($comment);
         $form    = new Form_Guestbook();
-        
+
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $comment->setFromArray($form->getValues());
@@ -79,7 +79,7 @@ class GuestbookController extends Et_Controller_Action
         else
         {
             $form->populate($comment->toArray());
-        }        
+        }
         $this->view->form = $form;
     }
     public function createAction()

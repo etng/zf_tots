@@ -14,7 +14,7 @@ bootstrap.class = "Bootstrap"
 
 appnamespace = ""
 resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
-resources.frontController.params.displayExceptions = 0
+resources.frontController.params.displayExceptions = 1
 resources.frontController.actionHelperPaths.HELPER_Prefix = "Et/Controller/Action/Helper"
 resources.frontController.plugins.layoutloader = Et_Controller_Plugin_ModuleLayout
 
@@ -23,25 +23,25 @@ resources.layout.layout = "bootstrap"
 resources.view[] =
 
 ; resources.multidb.defaultMetadataCache = "database"
-; 
+;
 ; resources.multidb.write.adapter = "pdo_mysql"
 ; resources.multidb.write.host = "localhost"
 ; resources.multidb.write.username = "username"
 ; resources.multidb.write.password = "password"
-; resources.multidb.write.dbname = "tots"
-; 
+; resources.multidb.write.dbname = "zf_tots"
+;
 ; resources.multidb.read.adapter = "pdo_mysql"
 ; resources.multidb.read.host = "localhost:3307"
 ; resources.multidb.read.username = "username"
 ; resources.multidb.read.password = "password"
-; resources.multidb.read.dbname = "tots"
+; resources.multidb.read.dbname = "zf_tots"
 ; resources.multidb.read.default = true
 
 resources.db.adapter = "pdo_mysql"
 resources.db.params.host = "localhost"
 resources.db.params.username = "username"
 resources.db.params.password = "password"
-resources.db.params.dbname = "tots"
+resources.db.params.dbname = "zf_tots"
 
 ;resources.db.adapter = "PDO_SQLITE"
 ;resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
@@ -78,9 +78,9 @@ resources.log.stream.writerParams.stream = APPLICATION_PATH "/../var/log/applica
 resources.log.stream.writerParams.mode = "a"
 resources.log.stream.filterName = "Priority"
 resources.log.stream.filterParams.priority = 7
-    
+
 resources.log.firebug.writerName = "Firebug"
-resources.log.firebug.writerParams[] = 
+resources.log.firebug.writerParams[] =
 resources.log.firebug.filterName = "Priority"
 resources.log.firebug.filterParams.priority = 7
 
@@ -95,8 +95,8 @@ resources.mail.defaultFrom.name = "tots.com"
 resources.mail.defaultReplyTo.email = webmaster@tots.com
 resources.mail.defaultReplyTo.name = "tots.com"
 
-resources.Jquery.noconflictmode = true        
-resources.Jquery.version = 1.6.4             
+resources.Jquery.noconflictmode = true
+resources.Jquery.version = 1.6.4
 ;resources.Jquery.localpath = "/assets/js/jquery-1.6.4.min.js"
 resources.Jquery.enable = true
 resources.Jquery.ui_enable = true

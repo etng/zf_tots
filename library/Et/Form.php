@@ -57,9 +57,9 @@ class Et_Form extends Zend_Form
                 'decorator' => array('wrapper' => 'HtmlTag'),
                 'options' => array('tag' => 'div', 'class' => 'clearfix')));
                 break;
-            case 'submit',:
-            case 'button', :
-            case 'image', :
+            case 'submit':
+            case 'button':
+            case 'image':
             case 'reset':
                 $options['decorators'] = array(
                 array('Tooltip'),
