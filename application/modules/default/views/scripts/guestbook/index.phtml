@@ -4,13 +4,14 @@
 </ul>
 
 
-<a href="<?php echo $this->url( array('controller' => 'guestbook', 'filter_confirm' => 'all' ), 'default', true) ?>"<?php $this->filter_confirm=='all' and print ' class="active"' ?>>All</a>
-<a href="<?php echo $this->url( array('controller' => 'guestbook', 'filter_confirm' => 'confirmed' ), 'default', true) ?>"<?php $this->filter_confirm=='confirmed' and print ' class="active"' ?>>confirmed</a>
-<a href="<?php echo $this->url( array('controller' => 'guestbook', 'filter_confirm' => 'unconfirmed' ), 'default', true) ?>"<?php $this->filter_confirm=='unconfirmed' and print ' class="active"' ?>>unconfirmed</a>
+<a href="<?php echo $this->url( array('filter_confirm' => 'all' ), 'default') ?>"<?php $this->filter_confirm=='all' and print ' class="active"' ?>>All</a>
+<a href="<?php echo $this->url( array('filter_confirm' => 'confirmed' ), 'default') ?>"<?php $this->filter_confirm=='confirmed' and print ' class="active"' ?>>confirmed</a>
+<a href="<?php echo $this->url( array('filter_confirm' => 'unconfirmed' ), 'default') ?>"<?php $this->filter_confirm=='unconfirmed' and print ' class="active"' ?>>unconfirmed</a>
 
-     <a class="btn" href="<?php echo $this->url( array('controller' => 'guestbook', 'action' => 'create' ), 'default', true) ?>">Create</a>
+     <a class="btn" href="<?php echo $this->url( array('action' => 'create' ), 'default') ?>">Create</a>
+     <a class="btn" href="<?php echo $this->url( array('action' => 'populate' ), 'default') ?>">Populate</a>
 
-     <table class="zebra-striped" id="sortTableExample">
+     <table class="zebra-striped">
         <thead>
           <tr>
             <th>#</th>
@@ -31,12 +32,12 @@
             <?php if($guestbook->isConfirmed()): ?>
             <?php echo $this->escape($guestbook->confirmed) ?>
             <?php else: ?>
-            <a href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'confirm', 'id'=>$guestbook->id)) ?>">Confirm</a>
+            <a href="<?php echo $this->url( array( 'action' => 'confirm', 'id'=>$guestbook->id)) ?>">Confirm</a>
             <?php endif; ?>
             </td>
             <td>
-            <a href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'edit', 'id'=>$guestbook->id)) ?>">Edit</a>
-            <a href="<?php echo $this->url( array( 'controller' => 'guestbook', 'action' => 'delete', 'id'=>$guestbook->id)) ?>">Delete</a>
+            <a href="<?php echo $this->url( array( 'action' => 'edit', 'id'=>$guestbook->id)) ?>">Edit</a>
+            <a href="<?php echo $this->url( array( 'action' => 'delete', 'id'=>$guestbook->id)) ?>">Delete</a>
             </td>
           </tr><?php endforeach ?>
         </tbody>

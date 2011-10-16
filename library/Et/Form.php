@@ -1,6 +1,7 @@
 <?php
 class Et_Form extends Zend_Form
 {
+    protected $has_submit=false;
     public function getDecorators()
     {
         if(! $this->_decorators)
@@ -10,6 +11,10 @@ class Et_Form extends Zend_Form
             array('HtmlTag', array('tag' => 'fieldset')),
             'Form'
             ));
+        }
+        if(!$this->has_submit)
+        {
+            $this->addSubmit();
         }
         return parent::getDecorators();
     }
@@ -61,6 +66,10 @@ class Et_Form extends Zend_Form
             case 'button':
             case 'image':
             case 'reset':
+                if($element== 'submit' || $element== 'image')
+                {
+                    $this->has_submit = true;
+                }
                 $options['decorators'] = array(
                 array('Tooltip'),
                 array('ViewHelper'),
@@ -68,9 +77,9 @@ class Et_Form extends Zend_Form
                 'decorator' => array('wrapper' => 'HtmlTag'),
                 'options' => array('tag' => 'div', 'class' => 'clearfix')));
                 $classes = array('btn');
-                if($element == 'submit')
+                if($element== 'submit')
                 {
-                $classes[] = 'primary';
+                    $classes[] = 'primary';
                 }
                 $options['class'] = implode(' ', $classes);
 

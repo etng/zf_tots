@@ -1,12 +1,15 @@
 <?php if ($this->pageCount): ?>
 <div class="pagination"> <ul>
 <!-- Previous page link -->
+<?php if ($this->first<$this->firstPageInRange): ?>
+   <li class="first"><a href="<?php echo $this->url(array('page' => $this->first)); ?>">
+    &lt;&lt; First
+  </a> </li>
+<?php endif; ?>
 <?php if (isset($this->previous)): ?>
    <li class="prev"><a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
     &lt; Previous
   </a> </li>
-<?php else: ?>
-  <!-- <li class="prev disabled"><a href="#">&lt; Previous</a></li> -->
 <?php endif; ?>
 
 <!-- Numbered page links -->
@@ -25,8 +28,12 @@
    <li><a class="next" href="<?php echo $this->url(array('page' => $this->next)); ?>">
     Next &gt;
   </a></li>
-<?php else: ?>
-   <!-- <li><a href="#" class="next disabled">Next &gt;</a></li> -->
-<?php endif; ?></ul>
+<?php endif; ?>
+<?php if ($this->last>$this->lastPageInRange): ?>
+   <li><a class="last" href="<?php echo $this->url(array('page' => $this->last)); ?>">
+    Last &gt;&gt;
+  </a></li>
+<?php endif; ?>
+</ul>
 </div>
 <?php endif; ?>

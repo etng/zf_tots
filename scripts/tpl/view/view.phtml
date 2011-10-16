@@ -1,0 +1,17 @@
+<a href="[?php echo $this->url( array( 'action' => 'edit', 'id'=>$this-><?php echo $table_name;?>->id)) ?]">[?php echo $this->translate('Edit')?]</a>
+<a href="[?php echo $this->url( array( 'action' => 'delete', 'id'=>$this-><?php echo $table_name;?>->id)) ?]">[?php echo $this->translate('Delete')?]</a>
+
+ <table class="zebra-striped">
+    <tbody>
+    <tr><th>#</th><td>[?php echo $this->escape($this-><?php echo $table_name;?>->id) ?]</td> </tr>
+    <tr>
+        <?php foreach($columns as $column):?>
+        <?php if($column['PRIMARY'])continue;?>
+
+        <td>[?php echo $this->translate('lbl_<?php echo $cls;?>_<?php echo $column['COLUMN_NAME'];?>')?]</td>
+        <td>[?php echo $this->escape($this-><?php echo $table_name;?>-><?php echo $column['COLUMN_NAME'];?>) ?]</td>
+      </tr>
+      <?php endforeach;?>
+
+    </tbody>
+  </table>

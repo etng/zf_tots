@@ -51,7 +51,7 @@ class GuestbookController extends Et_Controller_Action
     }
     public function confirmAction()
     {
-          $comments = new Model_Table_Guestbook();
+        $comments = new Model_Table_Guestbook();
         $comment = $comments->find($this->_getParam('id'))->current();
         $this->forward404Unless($comment);
         $comment->markConfirmed();
