@@ -110,7 +110,7 @@ if($getopt->getOption('m'))
             $labels = array_unique($labels);
             if($labels)
             {
-                file_put_contents(APPLICATION_PATH . '/../data/language/zh_CN/'.$table_name.'.php', sprintf('<?php return %s;', var_export(array_combine($labels, $labels), true)));
+                file_put_contents(APPLICATION_PATH . '/../data/language/zh_CN/model_'.$table_name.'.php', sprintf('<?php return %s;', var_export(array_combine($labels, $labels), true)));
             }
         }
 

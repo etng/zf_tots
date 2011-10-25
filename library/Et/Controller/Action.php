@@ -135,5 +135,19 @@ class Et_Controller_Action extends Zend_Controller_Action
              exit();
         }
     }
+
+    /**
+     * Translates the given string
+     * returns the translation
+     *
+     * @param  string             $messageId Translation string
+     * @param  string|Zend_Locale $locale    (optional) Locale/Language to use, identical with locale identifier, 
+     * @see Zend_Locale for more information
+     * @return string
+     */
+    public function _($messageid, $locale = null)
+    {
+        $translate = Zend_Registry::get('Zend_Translate');
+        return $translate->_($messageid, $locale);
+    }    
 }
-?>

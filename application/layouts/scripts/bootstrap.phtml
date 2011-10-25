@@ -26,6 +26,8 @@
       <?php echo $this->partial('sidebar.phtml', 'default') ?>
       </div>
       <div class="content">
+	  
+
           <?php foreach($this->messages as $message):?>
 <div class="alert-message <?php echo $message['lvl'] ?>">
   <p><?php echo $message['message'] ?></p>

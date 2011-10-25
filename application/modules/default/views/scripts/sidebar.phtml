@@ -21,8 +21,10 @@
     <li><a href="#">Link</a></li>
     <li><a href="#">Link</a></li>
   </ul>
+  <?php if(file_exists($auto_link = dirname(__file__). '/auto.phtml')):?>
   <h5>Misc</h5>
   <ul>
-    <?php include(dirname(__file__). '/auto.phtml');?>
+    <?php @include($auto_link);?>
   </ul>
+  <?php endif;?>
 </div>
