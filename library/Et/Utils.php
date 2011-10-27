@@ -1,6 +1,7 @@
 <?php
 class Et_Utils
 {
+    public static $encoding = 'base64';
     function randItem($item)
     {
         $items = func_get_args();
@@ -28,5 +29,27 @@ class Et_Utils
     public static function endwith($haystack, $needle)
     {
         return substr($haystack, strrpos($haystack, $needle)) == $needle;
+    }
+    public static function encode($data)
+    {
+        if(self::$encoding == 'json')
+        {
+            return Zend_Json::encode($data);
+        }
+        return base64_encode(serialize($data));
+    }
+    public static function decode($data)
+    {
+        if(self::$encoding == 'json')
+        {
+            return Zend_Json::decode($data);
+        }
+        $data = base64_decode($data);
+        $data = unserialize($data);
+        if(false === $data)
+        {
+            throw new Exception('malformed data to decode');
+        }
+        return $data;
     }
 }

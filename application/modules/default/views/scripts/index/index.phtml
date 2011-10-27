@@ -1,3 +1,5 @@
+   <?php $csrf='<script>alert("csrf")</script>';?>
+   
         <div class="hero-unit">
           <h1>Hello, world!</h1>
           <p>Vestibulum id ligula porta felis euismod semper. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
@@ -6,8 +8,8 @@
 
         <div class="row">
   <div class="span6">
- <h2>Heading</h2>
-            <p>Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
+ <h2>Intro</h2>
+            <p><?php echo $this->_('Today is %1$s', date('Y-m-d'));?> This is just for test of csrf<?php echo $this->e($csrf);?></p>
             <p><a class="btn" href="#">View details &raquo;</a></p>
   </div>
   <div class="span5">

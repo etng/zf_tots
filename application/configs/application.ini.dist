@@ -7,7 +7,7 @@ phpSettings.date.timezone = "Asia/Shanghai"
 
 includePaths.library = APPLICATION_PATH "/../library"
 
-
+pluginPaths.Et_Bootstrap_Resource="Et/Bootstrap/Resource"
 
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
