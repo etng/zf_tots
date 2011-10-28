@@ -52,4 +52,28 @@ class Et_Utils
         }
         return $data;
     }
+    public static $escape_method='htmlspecialchars';
+    public static $escape_encoding='UTF-8';
+    /**
+     * Escapes a value for output in a view script.
+     *
+     * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
+     * {@link $encoding} setting.
+     * 
+     * @see Zend_View_Abstract
+     * @param mixed $var The output to escape.
+     * @return mixed The escaped value.
+     */
+    public static function escape($var)
+    {
+        if (in_array(self::$escape_method, array('htmlspecialchars', 'htmlentities'))) {
+            return call_user_func(self::$escape_method, $var, ENT_COMPAT, self::$escape_encoding);
+        }
+
+        if (1 == func_num_args()) {
+            return call_user_func(self::$escape_method, $var);
+        }
+        $args = func_get_args();
+        return call_user_func_array(self::$escape_method, $args);
+    }    
 }

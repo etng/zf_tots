@@ -9,4 +9,8 @@ class Et_View extends Zend_View
     function e($s) {
         return $this->escape($s);
     }
+    function ee($s)
+    {
+        echo $this->escape($s);
+    }
 }
