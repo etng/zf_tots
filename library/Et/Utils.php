@@ -7,6 +7,13 @@ class Et_Utils
         $items = func_get_args();
         return $items[array_rand($items)];
     }
+	public static function cdump($args)
+	{
+	    $args = func_get_args();
+	    echo PHP_EOL.'<!--' . PHP_EOL;
+	    call_user_func_array('var_dump', $args);
+	    echo PHP_EOL . '-->'.PHP_EOL;	
+	}    
     public static function dump($args)
     {
         $args = func_get_args();
@@ -20,6 +27,54 @@ class Et_Utils
         call_user_func_array(array('self', 'dump'), $args);
         die();
     }
+    public static  function initCache($cache_name)
+    {
+        if(!self::$enable_cache)
+        {
+            return false;
+        }        
+        if(strpos($cache_name, 'cache_')!==0)
+        {
+            $cache_name = 'cache_' . $cache_name;
+        }
+        if(!Zend_Registry::isRegistered($cache_name))
+        {
+            $options = Zend_Registry::get($cache_name . '_options');
+            $logger = Zend_Registry::get('log');
+            if($logger)
+            {
+                $options['frontend']['options']['logging'] = true;
+                $options['frontend']['options']['logger'] = $logger;
+                $cache = Zend_Cache::factory($options['frontend']['name'], $options['backend']['name'], $options['frontend']['options'], $options['backend']['options']);
+            }
+            Zend_Registry::set($cache_name, $cache);
+        }
+        return Zend_Registry::get($cache_name);
+    }
+    public static $enable_cache = true;
+    public static  function cacheRead($cache, $ck)
+    {
+        if(!self::$enable_cache)
+        {
+            return null;
+        }
+        return self::initCache($cache)->load($ck);
+    }
+    public static  function cacheWrite($cache, $ck, $value)
+    {
+        if(!self::$enable_cache)
+        {
+            return false;
+        }
+        return self::initCache($cache)->save($value, $ck);
+    }
+    public static  function cacheRemove($cache, $ck) {
+        if(!self::$enable_cache)
+        {
+            return false;
+        }
+        return self::initCache($cache)->remove($ck);
+    }    
     /**
      * 判断字符串是否以特定字符串结尾
      * 
