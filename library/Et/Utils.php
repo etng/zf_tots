@@ -12,8 +12,8 @@ class Et_Utils
 	    $args = func_get_args();
 	    echo PHP_EOL.'<!--' . PHP_EOL;
 	    call_user_func_array('var_dump', $args);
-	    echo PHP_EOL . '-->'.PHP_EOL;	
-	}    
+	    echo PHP_EOL . '-->'.PHP_EOL;
+	}
     public static function dump($args)
     {
         $args = func_get_args();
@@ -32,7 +32,7 @@ class Et_Utils
         if(!self::$enable_cache)
         {
             return false;
-        }        
+        }
         if(strpos($cache_name, 'cache_')!==0)
         {
             $cache_name = 'cache_' . $cache_name;
@@ -74,7 +74,7 @@ class Et_Utils
             return false;
         }
         return self::initCache($cache)->remove($ck);
-    }    
+    }
     /**
      * 判断字符串是否以特定字符串结尾
      * 
@@ -114,7 +114,7 @@ class Et_Utils
      *
      * If escaping mechanism is one of htmlspecialchars or htmlentities, uses
      * {@link $encoding} setting.
-     * 
+     *
      * @see Zend_View_Abstract
      * @param mixed $var The output to escape.
      * @return mixed The escaped value.
@@ -130,5 +130,33 @@ class Et_Utils
         }
         $args = func_get_args();
         return call_user_func_array(self::$escape_method, $args);
-    }    
+    }
+    public static function loadCSV($csv_file, $first_row_as_header=true)
+    {
+        $rows = array();
+        if($handle = @fopen($csv_file, "r"))
+        {
+            $headers= array();
+            while ($row = fgetcsv($handle, 4096, ","))
+            {
+                if($first_row_as_header && empty($headers))
+                {
+                    $headers = $row;
+                }
+                else
+                {
+                    if($first_row_as_header)
+                    {
+                        $rows []= array_combine($headers, $row);
+                    }
+                    else
+                    {
+                        $rows []= $row;
+                    }
+                }
+            }
+            fclose($handle);
+        }
+        return $rows;
+    }
 }

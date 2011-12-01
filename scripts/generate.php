@@ -1,9 +1,7 @@
 <?php
 define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
-set_include_path(implode(PATH_SEPARATOR, array(
-    APPLICATION_PATH . '/../library',
-    get_include_path(),
-)));
+set_include_path(implode(PATH_SEPARATOR, array(APPLICATION_PATH . '/../library', get_include_path(), )));
+
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 
@@ -31,7 +29,7 @@ define('APPLICATION_ENV', (null === $env) ? 'development' : $env);
 $app_cfg_file = APPLICATION_PATH . '/configs/application.ini';
 if(!is_readable($app_cfg_file))
 {
-    $app_cfg_file = APPLICATION_PATH . '/configs/application.ini.dist';
+    $app_cfg_file = APPLICATION_PATH . '/configs/application.dist.ini';
 }
 $application = new Zend_Application(APPLICATION_ENV, $app_cfg_file);
 
