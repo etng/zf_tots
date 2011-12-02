@@ -21,11 +21,60 @@ class Et_Controller_Action extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
         $this->_helper->viewRenderer->setNoRender();
     }
+    function renderFormat($rows, $header, $title, $default_format='xls', $format_param='fmt')
+    {
+        switch ($this->_getParam('fmt', 'xls')) {
+            case 'xls':
+                $this->renderExcel($rows, $title, $title .'.xls', $header);
+                break;
+            case 'csv2':
+                $this->renderCsv($rows, $header);
+                break;
+            case 'csv':
+                $this->renderCsv($rows);
+                break;
+            case 'json':
+            default:
+                $this->renderJson($rows);
+                break;
+        }
+    }
+    function renderExcel($rows, $title, $filename, $headers)
+    {
+        $this->disableRender();
+        $file_path = Et_Utils::tempDir('excel') . '/' . $filename;
+        Et_Util::exportExcel($file_path, $title, $rows, $headers);
+        $this->sendFile($file_path);
+    }
     function renderJson($data)
     {
         $this->disableAutoRender();
         $this->getResponse()->sendHeaders();
         echo Zend_Json::encode($data);
+    }
+    function renderCsv($rows, $header=array())
+    {
+        $this->disableAutoRender();
+        $this->getResponse()->sendHeaders();
+        header('Content-Type: text/csv');
+        if($header)
+        {
+            echo $this->buildCsvRow($header).PHP_EOL;
+        }
+        foreach($rows as $row)
+        {
+            echo $this->buildCsvRow($row).PHP_EOL;
+        }
+    }
+    //http://en.wikipedia.org/wiki/Comma-separated_values
+    protected function buildCsvRow($arr)
+    {
+        $items = array();
+        foreach($arr as $item)
+        {
+            $items []= '"'. str_replace('"', '""', $item) . '"';
+        }
+        return implode(',', $items);
     }
     function renderText($text)
     {
@@ -47,8 +96,8 @@ class Et_Controller_Action extends Zend_Controller_Action
             if(is_array($params[0]))
             {
                 call_user_func_array(array($this, 'redirectRoute'), $params);
-            
-            }else 
+
+            }else
             {
                 call_user_func_array(array($this, 'redirect'), $params);
             }
@@ -93,7 +142,7 @@ class Et_Controller_Action extends Zend_Controller_Action
      * @param  boolean $reset
      * @param  boolean $encode
      * @return void
-     */        
+     */
     function redirectRoute(array $urlOptions = array(), $name = null, $reset = false, $encode = true)
     {
         $this->_helper->redirector->gotoRoute($url, $options);
@@ -108,7 +157,7 @@ class Et_Controller_Action extends Zend_Controller_Action
      * @param  string $module
      * @param  array  $params
      * @return void
-     */    
+     */
     function redirect($action, $controller = null, $module = null, array $params = array())
     {
         $this->_helper->redirector->gotoSimple($url, $options);
@@ -141,7 +190,7 @@ class Et_Controller_Action extends Zend_Controller_Action
      * returns the translation
      *
      * @param  string             $messageId Translation string
-     * @param  string|Zend_Locale $locale    (optional) Locale/Language to use, identical with locale identifier, 
+     * @param  string|Zend_Locale $locale    (optional) Locale/Language to use, identical with locale identifier,
      * @see Zend_Locale for more information
      * @return string
      */
@@ -149,5 +198,5 @@ class Et_Controller_Action extends Zend_Controller_Action
     {
         $translate = Zend_Registry::get('Zend_Translate');
         return $translate->_($messageid, $locale);
-    }    
+    }
 }
