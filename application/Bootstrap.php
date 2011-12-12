@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $profiler = new Zend_Db_Profiler_Firebug('Queries runned');
             $profiler->setEnabled(true);
             $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
-            Zend_Registry::get($db)->setProfiler($profiler);
+            $db->setProfiler($profiler);
         }
     }
     protected function _initI18N()
