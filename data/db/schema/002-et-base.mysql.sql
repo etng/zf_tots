@@ -3,7 +3,7 @@
 # Server version:               5.5.18-log
 # Server OS:                    Win32
 # HeidiSQL version:             6.0.0.3603
-# Date/time:                    2011-12-16 14:56:08
+# Date/time:                    2011-12-16 15:01:55
 # --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -50,23 +50,21 @@ CREATE TABLE IF NOT EXISTS `et_tree` (
 # Dumping structure for table zf_tots.et_user
 DROP TABLE IF EXISTS `et_user`;
 CREATE TABLE IF NOT EXISTS `et_user` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `title` varchar(50) NOT NULL,
-  `pass` char(32) NOT NULL,
-  `avatar` varchar(255) NOT NULL,
-  `signature` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `timezone` varchar(50) NOT NULL,
-  `language` varchar(50) NOT NULL,
-  `created` datetime NOT NULL,
-  `updated` datetime NOT NULL,
-  `activated` datetime NOT NULL,
-  `logined` datetime NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `name` varchar(50) NOT NULL COMMENT '姓名',
+  `title` varchar(50) NOT NULL COMMENT '职位',
+  `pass` char(32) NOT NULL COMMENT '密码',
+  `avatar` varchar(255) NOT NULL COMMENT '头像',
+  `signature` varchar(255) NOT NULL COMMENT '签名',
+  `email` varchar(100) NOT NULL COMMENT 'email',
+  `timezone` varchar(50) NOT NULL COMMENT '时区',
+  `language` varchar(50) NOT NULL COMMENT '语言',
+  `created` datetime NOT NULL COMMENT '加入时间',
+  `updated` datetime NOT NULL COMMENT '更新时间',
+  `activated` datetime NOT NULL COMMENT '激活时间',
+  `logined` datetime NOT NULL COMMENT '登录时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-# Data exporting was unselected.
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户';
 
 # Data exporting was unselected.
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
