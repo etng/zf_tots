@@ -50,6 +50,7 @@ class Et_Controller_Action extends Zend_Controller_Action
     {
         $this->disableAutoRender();
         $this->getResponse()->sendHeaders();
+        header('Content-Type: application/json');
         echo Zend_Json::encode($data);
     }
     function renderCsv($rows, $header=array())

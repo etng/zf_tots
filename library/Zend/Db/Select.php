@@ -251,6 +251,7 @@ class Zend_Db_Select
             /**
              * @see Zend_Db_Select_Exception
              */
+             var_dump($this->_parts);die();
             require_once 'Zend/Db/Select/Exception.php';
             throw new Zend_Db_Select_Exception("No table has been specified for the FROM clause");
         }

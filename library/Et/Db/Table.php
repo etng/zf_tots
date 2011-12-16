@@ -31,5 +31,18 @@ abstract class Et_Db_Table extends Zend_Db_Table
 
         return $row->save();
     }
+    public function truncate()
+    {
+        return $this->getAdapter()->query(sprintf('TRUNCATE TABLE `%s`', $this->info('name')));
+    }
+    public function count($where=array())
+    {
+        $select = $this->select()->from($this->info('name'), new Zend_Db_Expr('count(1)'), $this->info('schema'));
+        foreach($where as $cond=>$value)
+        {
+            $select->where($cond, $value);
+        }
+        return $this->getAdapter()->fetchOne($select);
+    }
 }
 ?>

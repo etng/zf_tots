@@ -14,11 +14,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $db_options = $options['resources']['db'];
         $this->bootstrap('db');
         Et_Db_Table::$prefix = $db_options['params']['prefix'];
-        if($db =  Zend_Db_Table::getDefaultAdapter())
+        if(($db =  Zend_Db_Table::getDefaultAdapter()) && ($db_options['profiler']))
         {
             $profiler = new Zend_Db_Profiler_Firebug('Queries runned');
             $profiler->setEnabled(true);
-            $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
+//            $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
             $db->setProfiler($profiler);
         }
     }
