@@ -36,4 +36,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
     }
+    protected function _initAsset()
+    {
+        $conf = $this->getOption('assets');
+        Zend_Registry::set('assets_conf', $conf);
+    }
 }

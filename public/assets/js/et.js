@@ -295,6 +295,63 @@ et.ns("et.tool.CountDown", function() {
 });
 
 
+(function($){
+    /*class=<textarea "auto_height" data-max-height="200px"></textarea>*/
+    $.fn.autoTextarea = function(options) {
+        var defaults={
+            maxHeight:null,//文本框是否自动撑高，默认：null，不自动撑高；如果自动撑高必须输入数值，该值作为文本框自动撑高的最大高度
+            minHeight:$(this).height() //默认最小高度，也就是文本框最初的高度，当内容高度小于这个高度的时候，文本以这个高度显示
+        };
+        var opts = $.extend({},defaults,options);
+        return $(this).each(function() {
+            $(this).bind("paste cut keydown keyup focus blur",function(){
+                var height,style=this.style;
+                var maxHeight = parseInt(opts.maxHeight?opts.maxHeight:$(this).data('max-height'), 10);
+                this.style.height =  opts.minHeight + 'px';
+                if (this.scrollHeight > opts.minHeight) {
+                    if (opts.maxHeight && this.scrollHeight > opts.maxHeight) {
+                        height = opts.maxHeight;
+                        style.overflowY = 'scroll';
+                    } else {
+                        height = this.scrollHeight;
+                        style.overflowY = 'hidden';
+                    }
+                    style.height = height  + 'px';
+                }
+            });
+        });
+    };
+    $.fn.selection = function(){
+        var s,e,range,stored_range;
+        if(this[0].selectionStart == undefined){
+            var selection=document.selection;
+            if (this[0].tagName.toLowerCase() != "textarea") {
+                var val = this.val();
+                range = selection.createRange().duplicate();
+                range.moveEnd("character", val.length);
+                s = (range.text == "" ? val.length:val.lastIndexOf(range.text));
+                range = selection.createRange().duplicate();
+                range.moveStart("character", -val.length);
+                e = range.text.length;
+            }else {
+                range = selection.createRange(),
+                stored_range = range.duplicate();
+                stored_range.moveToElementText(this[0]);
+                stored_range.setEndPoint('EndToEnd', range);
+                s = stored_range.text.length - range.text.length;
+                e = s + range.text.length;
+            }
+        }else{
+            s=this[0].selectionStart,
+            e=this[0].selectionEnd;
+        }
+        var te=this[0].value.substring(s,e);
+        return {begin:s,end:e,content:te}
+    };
+    $('textarea.auto_height').autoTextarea();
+})(jQuery);
+
+
 //et.ns("et.ui.MsgBox", function() {
 //    et.ui.MsgBox = {
 //    };

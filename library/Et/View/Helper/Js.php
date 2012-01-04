@@ -16,9 +16,18 @@ class Et_View_Helper_Js extends Zend_View_Helper_Partial
 
     public function js($name = null, $module = null, $model = null)
     {
-        $script = $this->partial($name, $module, $model);
-        if(!ini_get('display_errors')){
-            $script = $this->pack($script);
+        settype($names, 'array');
+        $script = '';
+        foreach($names as $name)
+        {
+            try
+            {
+                $script .=';' . $this->partial($name, $module, $model);
+            }
+            catch(Exception $e)
+            {
+
+            }
         }
         return $script;
     }
